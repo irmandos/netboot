@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# set -e
+
+source functions
+
+export PATH=/usr/bin:/usr/sbin:/bin:/sbin
+MOUNTPOINT=/root
+
+# The only command line argument needed for netboot is "image_url"
+parse_cmdline() {
+    for x in $(cat /proc/cmdline); do
+        case $x in
+            image_url=*)
+                export IMAGE_URL="${x#image_url=}" ;;
+            *)
+                log_warning_msg "No image_url found in the passed boot options." ;;
+        esac
+    done
+}
+
+
+mountroot() {
+    rc=1
+    parse_cmdline
+
+    if test -z "${IMAGE_URL}"; then
+        log_failure_msg "No root image to mount since image_url was not defined."
+        return ${rc}
+    fi
+
+    # Configure networking before attempting downloads
+    modprobe af_packet
+    configure_networking
+    udevadm trigger
+    udevadm settle
+    export DEVICE
+
+
+    FILE_NAME=$(basename "${IMAGE_URL}")
+    FILE_PATH="/${FILE_NAME}"
+
+    log_begin_msg "Attempting to download and mount ${IMAGE_URL}"
+    if wget "${IMAGE_URL}" -O "${FILE_PATH}"; then
+        log_end_msg
+        if echo "${FILE_NAME}" | grep -q squashfs ; then
+            log_begin_msg "Un-packing squashfs from ${FILE_PATH}"
+            mount -o size=1G -t tmpfs rootfs "${MOUNTPOINT}"
+            sleep 1
+            unsquashfs -f -d "${MOUNTPOINT}" "${FILE_PATH}" && rm -f "${FILE_PATH}"
+            log_end_msg
+            rc=0
+        elif mount "${FILE_PATH}" "${MOUNTPOINT}"; then
+            log_begin_msg "Mounted rootfs image from ${FILE_PATH} to ${MOUNTPOINT}"
+            log_end_msg
+            rc=0
+	      else
+            log_begin_msg "Failed mounting downloaded file: ${downloaded_file}"
+            log_end_msg
+        fi
+    else
+        log_failure_msg "Download failed from: ${IMAGE_URL}"
+    fi
+    log_end_msg
+    return ${rc}
+}
+

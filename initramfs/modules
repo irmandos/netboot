@@ -1,0 +1,15 @@
+# List of modules that you want to include in your initramfs.
+# They will be loaded at boot time in the order below.
+#
+# Syntax:  module_name [args ...]
+#
+# These modules ensure support for most common filesystems
+nls_iso8859-1
+isofs
+ext3
+ext4
+xfs
+jfs
+vfat
+zfs
+overlay

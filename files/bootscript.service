@@ -1,0 +1,13 @@
+[Unit]
+Description=Boot script for generic automation
+After=local-fs.target
+After=network.target
+
+[Service]
+ExecStart=/root/local_bootscript.sh
+RemainAfterExit=true
+Type=oneshot
+
+[Install]
+WantedBy=multi-user.target
+

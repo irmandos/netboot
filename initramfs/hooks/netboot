@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# Add useful binaries to initrd for netboot
+#
+
+if [ "$1" = "prereqs" ]; then
+        echo "udev"
+        exit
+fi
+
+. /usr/share/initramfs-tools/hook-functions
+
+SCRIPT_DIR=$(dirname $(realpath ${0}))
+BASEDIR=$(realpath "${SCRIPT_DIR}/../../")
+
+copy_exec "/usr/bin/unsquashfs"
+copy_exec "/usr/sbin/switch_root"
+
+copy_exec "/usr/bin/free"
+copy_exec "/usr/bin/gunzip"
+copy_exec "/usr/bin/gzip"
+copy_exec "/usr/bin/awk"
+copy_exec "/usr/bin/bash"
+copy_exec "/usr/bin/chmod"
+copy_exec "/usr/bin/curl"
+copy_exec "/usr/bin/less"
+copy_exec "/usr/bin/lsblk"
+copy_exec "/usr/bin/mount"
+copy_exec "/usr/bin/readlink"
+copy_exec "/usr/bin/touch"
+copy_exec "/usr/bin/vi"
+

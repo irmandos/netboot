@@ -1,0 +1,6 @@
+# Ignore working directories and build outputs
+files/authorized_keys
+initrd.*
+rootfs.img
+rootfs.mnt
+rootfs.squashfs
