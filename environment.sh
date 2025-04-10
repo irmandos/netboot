@@ -12,5 +12,5 @@ ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";'>/etc/apt/apt.conf.d/00aptproxy
 apt install cifs-utils initramfs-tools git wget nano 
 
-mkdir ${NETWDIR}
+mkdir -p ${NETWDIR}
 mount -t cifs ${NETWDIR} ${NETWDIR} -o username=irmandos,uid=$(id -u),gid=$(id -g)
