@@ -10,7 +10,7 @@ IMG_FILE="${NETWDIR}/rootfs.img"
 ROOTFS_MNT="${BASEDIR}/rootfs.mnt"
 
 # Build options for the root image
-IMG_SIZE="256"                 # Image size only matters when not using "squashfs" 
+IMG_SIZE="256m"                 # Image size only matters when not using "squashfs" 
 VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
 INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap"
