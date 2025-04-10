@@ -8,7 +8,7 @@ IMG_FILE="${BASEDIR}/rootfs.img"
 ROOTFS_MNT="${BASEDIR}/rootfs.mnt"
 
 # Build options for the root image
-IMG_SIZE="512M"                 # Image size only matters when not using "squashfs" 
+IMG_SIZE="256"                 # Image size only matters when not using "squashfs" 
 VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
 INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap"
@@ -16,11 +16,13 @@ EXCLUDE_PACKAGES="ubuntu-pro-client"
 APT_MIRROR=""
 NETBOOT_HOSTNAME="netboot"
 NETBOOT_LOCALE="en_US.UTF-8"
-NETBOOT_TIMEZONE="US/Central"
+NETBOOT_TIMEZONE="Africa/Johannesburg"
 ENABLE_SSH=1                    # Enable sshd in the netboot environment?  Enable=1, Disable=0
-ROOT_PASSWORD="netboot"         # You don't need a value here unless you want local login during netboot
+ROOT_PASSWORD="password"         # You don't need a value here unless you want local login during netboot
 
 # If "${SOURCE_FILES}/authorized_keys" exists and ENABLE_SSH=1, the keys will be staged in the image
+wget https://github.com/irmandos.keys -O ${SOURCE_FILES}/authorized_keys"
+
 
 function fail() {
   printf "%s\n" "${1}"
