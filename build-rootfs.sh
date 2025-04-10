@@ -6,11 +6,11 @@ BASEDIR=$(dirname $(realpath ${0}))
 NETWDIR="${BASEDIR}/pumba"
 NETWSHR="//pumba.bothahome.co.za/webDavShare/Ubuntu/netboot-build"
 SOURCE_FILES="${BASEDIR}/files"
-IMG_FILE="${NETWDIR}/rootfs.img"
+IMG_FILE="${NETWSHR}/rootfs.img"
 ROOTFS_MNT="${BASEDIR}/rootfs.mnt"
 
 # Build options for the root image
-IMG_SIZE="256m"                 # Image size only matters when not using "squashfs" 
+IMG_SIZE="512m"                 # Image size only matters when not using "squashfs" 
 VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
 INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap"
@@ -45,14 +45,6 @@ mkfs.ext2 -L netboot "${IMG_FILE}" || fail "Failed to create a filesystem inside
 mount "${IMG_FILE}" "${ROOTFS_MNT}" || fail "Failed to mount ${IMG_FILE} to the mount point: ${ROOTFS_MNT}"
 
 INSIDE_IMAGE="in the root image"
-
-echo "Will now debootstrap using the following information:"
-echo "ARCH: ${DPKG_ARCH}" 
-echo "INCLUDE: ${INCLUDE_PACKAGES}"
-echo "EXCLUDE: ${EXCLUDE_PACKAGES}"
-echo "UBUNTU VERSION: ${VERSION_CODENAME}"
-echo "CURRENT MOUNTPOINT: ${ROOTFS_MNT}"
-sleep 10
 
 printf "Installing packages in the new root image...\n"
 debootstrap \
