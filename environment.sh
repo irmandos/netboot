@@ -6,7 +6,7 @@ NETWDIR="${BASEDIR}/pumba"
 NETWSHR="//pumba.bothahome.co.za/webDavShare/Ubuntu/netboot-build"
 SOURCE_FILES="${BASEDIR}/files"
 IMG_FILE="${NETWDIR}/rootfs.img"
-ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
+ROOTFS_MNT="${BASEDIR}/rootfs.mnt"
 
 #Ensure we have the tools we need
 echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";'>/etc/apt/apt.conf.d/00aptproxy
