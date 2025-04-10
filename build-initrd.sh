@@ -2,8 +2,9 @@
 # Build a custom initrd file for netboot
 
 BASEDIR=$(dirname $(realpath ${0}))
+NETWDIR=="${BASEDIR}/pumba"
 CONFDIR="${BASEDIR}/initramfs"
-OUTFILE="${BASEDIR}/initrd.gz"
+OUTFILE="${NETWDIR}/initrd.gz"
 
 function fail() {
   printf "%s\n" "${1}"
