@@ -4,3 +4,4 @@ initrd.*
 rootfs.img
 rootfs.mnt
 rootfs.squashfs
+pumba/

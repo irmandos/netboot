@@ -13,4 +13,4 @@ echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";'>/etc/ap
 apt install cifs-utils initramfs-tools git wget nano 
 
 mkdir -p ${NETWDIR}
-mount -t cifs ${NETWDIR} ${NETWDIR} -o username=irmandos,uid=$(id -u),gid=$(id -g)
+mount -t cifs ${NETWSHR} ${NETWDIR} -o username=irmandos,uid=$(id -u),gid=$(id -g)
