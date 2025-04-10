@@ -3,8 +3,8 @@
 
 # Build environment
 BASEDIR=$(dirname $(realpath ${0}))
-NETWDIR=="${BASEDIR}/pumba"
-NETWSHR=="//pumba.bothahome.co.za/webDavShare/Ubuntu/netboot-build"
+NETWDIR="${BASEDIR}/pumba"
+NETWSHR="//pumba.bothahome.co.za/webDavShare/Ubuntu/netboot-build"
 SOURCE_FILES="${BASEDIR}/files"
 IMG_FILE="${NETWDIR}/rootfs.img"
 ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
