@@ -3,9 +3,11 @@
 
 # Build environment
 BASEDIR=$(dirname $(realpath ${0}))
+NETWDIR=="${BASEDIR}/pumba"
+NETWSHR=="//pumba.bothahome.co.za/webDavShare/Ubuntu/netboot-build"
 SOURCE_FILES="${BASEDIR}/files"
-IMG_FILE="${BASEDIR}/rootfs.img"
-ROOTFS_MNT="${BASEDIR}/rootfs.mnt"
+IMG_FILE="${NETWDIR}/rootfs.img"
+ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 
 # Build options for the root image
 IMG_SIZE="256"                 # Image size only matters when not using "squashfs" 
