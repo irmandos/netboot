@@ -46,6 +46,14 @@ mount "${IMG_FILE}" "${ROOTFS_MNT}" || fail "Failed to mount ${IMG_FILE} to the 
 
 INSIDE_IMAGE="in the root image"
 
+echo "Will now debootstrap using the following information:"
+echo "ARCH: ${DPKG_ARCH}" 
+echo "INCLUDE: ${INCLUDE_PACKAGES}"
+echo "EXCLUDE: ${EXCLUDE_PACKAGES}"
+echo "UBUNTU VERSION: ${VERSION_CODENAME}"
+echo "CURRENT MOUNTPOINT: ${ROOTFS_MNT}"
+pause
+
 printf "Installing packages in the new root image...\n"
 debootstrap \
  --arch="${DPKG_ARCH}" \
