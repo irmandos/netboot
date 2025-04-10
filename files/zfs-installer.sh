@@ -20,7 +20,7 @@ INCLUDE_PACKAGES="ubuntu-minimal,openssh-server,wget"
 EXCLUDE_PACKAGES="ubuntu-pro-client"
 APT_MIRROR="archive.ubuntu.com"
 
-echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /etc/apt/apt.config.d/00aptproxy
+echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /etc/apt/apt.conf.d/00aptproxy
 
 # Re-run with sudo if not running as root
 if [[ $(id -u) -ne 0 ]]
@@ -188,7 +188,7 @@ touch /mnt/var/lib/dpkg/status || fail "Failed to create /var/lib/dpkg/status"
 mount -t tmpfs tmpfs /mnt/run
 [[ -d /mnt/run/lock ]] || mkdir /mnt/run/lock
 
-echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /mnt/etc/apt/apt.config.d/00aptproxy
+echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /mnt/etc/apt/apt.conf.d/00aptproxy
 
 printf "\nInstalling to the ZFS root using debootstrap...\n\n"
 debootstrap \
