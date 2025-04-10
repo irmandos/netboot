@@ -2,7 +2,7 @@
 # Build a custom initrd file for netboot
 
 BASEDIR=$(dirname $(realpath ${0}))
-NETWDIR=="${BASEDIR}/pumba"
+NETWDIR="${BASEDIR}/pumba"
 CONFDIR="${BASEDIR}/initramfs"
 OUTFILE="${NETWDIR}/initrd.gz"
 
