@@ -51,7 +51,7 @@ debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude "${EXCLUDE_PACKAGES}" \
- "${VERSION_CODENAME}" "${ROOTFS_MNT}" "${MIRROR}" || fail "Failed installing the new root with debootstrap"
+ "${VERSION_CODENAME}" "${ROOTFS_MNT}" || fail "Failed installing the new root with debootstrap"
 
 # Ensure basic filesystem permissions
 chmod 700 "${ROOTFS_MNT}/root"
