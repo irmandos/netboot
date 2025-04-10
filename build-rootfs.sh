@@ -52,7 +52,7 @@ echo "INCLUDE: ${INCLUDE_PACKAGES}"
 echo "EXCLUDE: ${EXCLUDE_PACKAGES}"
 echo "UBUNTU VERSION: ${VERSION_CODENAME}"
 echo "CURRENT MOUNTPOINT: ${ROOTFS_MNT}"
-pause
+sleep 30
 
 printf "Installing packages in the new root image...\n"
 debootstrap \
