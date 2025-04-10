@@ -15,7 +15,7 @@ VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
 INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap"
 EXCLUDE_PACKAGES="ubuntu-pro-client"
-APT_MIRROR="archive.ubuntu.com"
+MIRROR="http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu"
 NETBOOT_HOSTNAME="netboot"
 NETBOOT_LOCALE="en_US.UTF-8"
 NETBOOT_TIMEZONE="Africa/Johannesburg"
@@ -59,7 +59,7 @@ debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude "${EXCLUDE_PACKAGES}" \
- "${VERSION_CODENAME}" "${ROOTFS_MNT}" || fail "Failed installing the new root with debootstrap"
+ "${VERSION_CODENAME}" "${ROOTFS_MNT}" "${MIRROR}" || fail "Failed installing the new root with debootstrap"
 
 # Ensure basic filesystem permissions
 chmod 700 "${ROOTFS_MNT}/root"
