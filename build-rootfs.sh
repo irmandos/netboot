@@ -21,7 +21,7 @@ ENABLE_SSH=1                    # Enable sshd in the netboot environment?  Enabl
 ROOT_PASSWORD="password"         # You don't need a value here unless you want local login during netboot
 
 # If "${SOURCE_FILES}/authorized_keys" exists and ENABLE_SSH=1, the keys will be staged in the image
-wget https://github.com/irmandos.keys -O ${SOURCE_FILES}/authorized_keys"
+wget https://github.com/irmandos.keys -O ${SOURCE_FILES}/authorized_keys
 
 
 function fail() {
