@@ -10,7 +10,7 @@ ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 
 #Ensure we have the tools we need
 echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";'>/etc/apt/apt.conf.d/00aptproxy
-apt install cifs-utils initramfs-tools git wget nano 
+apt install cifs-utils squashfs-tools initramfs-tools git wget nano 
 
 mkdir -p ${NETWDIR}
 mount -t cifs ${NETWSHR} ${NETWDIR} -o username=irmandos,uid=$(id -u),gid=$(id -g)
