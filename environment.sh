@@ -14,3 +14,5 @@ apt install cifs-utils initramfs-tools git wget nano
 
 mkdir -p ${NETWDIR}
 mount -t cifs ${NETWSHR} ${NETWDIR} -o username=irmandos,uid=$(id -u),gid=$(id -g)
+./build-initrd.sh
+./build-rootfs.sh
