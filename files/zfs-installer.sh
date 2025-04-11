@@ -18,7 +18,7 @@ VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
 INCLUDE_PACKAGES="ubuntu-minimal,openssh-server,wget,nano,auto-apt-proxy"
 EXCLUDE_PACKAGES="ubuntu-pro-client"
-MIRROR="http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu"
+MIRROR="http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu"    #No auto-apt-proxy, using full apt-cacher-ng url to make use of it
 
 echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /etc/apt/apt.conf.d/00aptproxy
 
