@@ -383,6 +383,7 @@ zpool export -f rpool
 
 printf "Installation complete.  You should be able to reboot into the new system.\n"
 printf "Remember to run host-namer.sh for proper hostnameing ELSE auto-apt-proxy WILL NOT WORK.\n"
+printf "Once host-namer.sh has done it's job and auto-apt-proxy is installed you can remove /etc/apt/apt.conf.d/00aptproxy.\n"
 if [[ $REBOOT = Y ]]; then
   printf "Rebooting...\n"
   reboot
