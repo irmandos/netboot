@@ -382,6 +382,7 @@ zfs snapshot -r rpool@shiny_new
 zpool export -f rpool
 
 printf "Installation complete.  You should be able to reboot into the new system.\n"
+printf "Remember to run host-namer.sh for proper hostnameing ELSE auto-apt-proxy WILL NOT WORK.\n"
 if [[ $REBOOT = Y ]]; then
   printf "Rebooting...\n"
   reboot
