@@ -16,7 +16,7 @@ REBOOT=Y                        # Reboot automatically after completion (Y/N)
 # Options for debootstrap
 VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
-INCLUDE_PACKAGES="ubuntu-minimal,openssh-server,wget"
+INCLUDE_PACKAGES="ubuntu-minimal,openssh-server,wget,nano,auto-apt-proxy"
 EXCLUDE_PACKAGES="ubuntu-pro-client"
 MIRROR="http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu"
 
