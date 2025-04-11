@@ -264,6 +264,9 @@ function fail() {
   exit 1
 }
 
+sed -i '/^#\?DAEMON_ARGS/ s/^#\?DAEMON_ARGS.*/DAEMON_ARGS="-w 1024"/' /etc/default/haveged
+update-rc.d haveged defaults
+
 printf "Setting locale to en_US.UTF-8 and timezone to US/Central...\n"
 locale-gen --purge "${NEW_LOCALE}" &>/dev/null || fail "Failed running locale-gen"
 update-locale LANG="${NEW_LOCALE}" &>/dev/null || fail "Failed running update-locale"
