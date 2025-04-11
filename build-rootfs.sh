@@ -13,7 +13,7 @@ ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 IMG_SIZE="512m"                 # Image size only matters when not using "squashfs" 
 VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
-INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap,haveged"
+INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap,haveged,auto-apt-proxy"
 EXCLUDE_PACKAGES="ubuntu-pro-client"
 MIRROR="http://archive.ubuntu.com/ubuntu"    #Using auto-apt-proxy no need to specify proxy here else use http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu
 NETBOOT_HOSTNAME="netboot"
@@ -51,6 +51,7 @@ debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude "${EXCLUDE_PACKAGES}" \
+ --components=main,restricted,universe,multiverse \
  "${VERSION_CODENAME}" "${ROOTFS_MNT}" "${MIRROR}" || fail "Failed installing the new root with debootstrap"
 
 # Ensure basic filesystem permissions
