@@ -8,8 +8,11 @@ SOURCE_FILES="${BASEDIR}/files"
 IMG_FILE="${NETWDIR}/rootfs.img"
 ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 
+#Ensure hostname is properly set to FQDN using host-namer.sh script in order for auto-apt-proxy to work corrctly
+chmod +x ${NETWDIR}/host-namer.sh
+./${NETWDIR}/host-namer.sh fqdn
+
 #Ensure we have the tools we need
-echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";'>/etc/apt/apt.conf.d/00aptproxy
 apt install cifs-utils squashfs-tools initramfs-tools git wget nano auto-apt-proxy debootstrap -y
 
 mkdir -p ${NETWDIR}
