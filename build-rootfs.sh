@@ -46,11 +46,12 @@ mount "${IMG_FILE}" "${ROOTFS_MNT}" || fail "Failed to mount ${IMG_FILE} to the 
 INSIDE_IMAGE="in the root image"
 
 printf "Installing packages in the new root image...\n"
+#components=main,restricted,universe,multiverse
 debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude "${EXCLUDE_PACKAGES}" \
- --components=main,universe \ #main,restricted,universe,multiverse
+ --components=main,universe \
  "${VERSION_CODENAME}" "${ROOTFS_MNT}" "${MIRROR}" || fail "Failed installing the new root with debootstrap"
 
 # Ensure basic filesystem permissions
