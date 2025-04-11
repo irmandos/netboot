@@ -20,6 +20,15 @@ INCLUDE_PACKAGES="ubuntu-minimal,openssh-server,wget,nano,haveged,auto-apt-proxy
 EXCLUDE_PACKAGES="ubuntu-pro-client"
 MIRROR="http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu"    #No auto-apt-proxy, using full apt-cacher-ng url to make use of it
 
+# Dynamically determine required components for INCLUDE_PACKAGES
+COMPONENTS_REQUIRED=$(
+    for pkg in ${INCLUDE_PACKAGES}; do
+        apt-cache policy "$pkg" 2>/dev/null | \
+        grep -Eo 'http.* (main|universe|restricted|multiverse)' | \
+        awk '{print $NF}'
+    done | sort -u | tr '\n' ','
+)
+COMPONENTS_REQUIRED=${COMPONENTS_REQUIRED%,}
 #echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /etc/apt/apt.conf.d/00aptproxy
 
 # Re-run with sudo if not running as root
@@ -193,7 +202,7 @@ debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude="${EXCLUDE_PACKAGES}" \
- --components=main,restricted,universe,multiverse \
+ --components="${COMPONENTS_REQUIRED}" \
  "${VERSION_CODENAME}" /mnt "${MIRROR}" \
   || fail "Installation failed running debootstrap"
 
