@@ -3,7 +3,7 @@
 # Ref: https://openzfs.github.io/openzfs-docs/Getting%20Started/Ubuntu/Ubuntu%2022.04%20Root%20on%20ZFS.html
 
 # Installation parameters
-ROOT_DISK=/dev/vda              # All data on this disk will be destroyed
+ROOT_DISK=/dev/sda              # All data on this disk will be destroyed
 NEW_HOSTNAME=ubuzfs             # The hostname to be assigned to the new system
 HIBERNATION=Y                   # Enable hibernation (requires a traditional swap partition outside of ZFS) Y/N
 SWAP_SIZE=0                     # Swap size in GB.  Swap will use a ZFS volume unless HIBERNATION=Y
