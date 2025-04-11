@@ -25,16 +25,6 @@ ROOT_PASSWORD="password"         # You don't need a value here unless you want l
 # If "${SOURCE_FILES}/authorized_keys" exists and ENABLE_SSH=1, the keys will be staged in the image
 wget https://github.com/irmandos.keys -O ${SOURCE_FILES}/authorized_keys
 
-# Dynamically determine required components for INCLUDE_PACKAGES
-COMPONENTS_REQUIRED=$(
-    for pkg in ${INCLUDE_PACKAGES}; do
-        apt-cache policy "$pkg" 2>/dev/null | \
-        grep -Eo 'http.* (main|universe|restricted|multiverse)' | \
-        awk '{print $NF}'
-    done | sort -u | tr '\n' ','
-)
-COMPONENTS_REQUIRED=${COMPONENTS_REQUIRED%,}
-
 function fail() {
   printf "%s\n" "${1}"
   exit 1
@@ -60,7 +50,7 @@ debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude "${EXCLUDE_PACKAGES}" \
- --components="${COMPONENTS_REQUIRED}" \
+ --components=main,universe \ #main,restricted,universe,multiverse
  "${VERSION_CODENAME}" "${ROOTFS_MNT}" "${MIRROR}" || fail "Failed installing the new root with debootstrap"
 
 # Ensure basic filesystem permissions
