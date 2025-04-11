@@ -17,7 +17,7 @@ apt install cifs-utils squashfs-tools initramfs-tools git wget nano auto-apt-pro
 
 mkdir -p ${NETWDIR}
 mount -t cifs ${NETWSHR} ${NETWDIR} -o username=irmandos,uid=$(id -u),gid=$(id -g)
-cp /boot/vmlinuz ${NETWDIR}/vmlinuz
 chmod +x *.sh
-./build-initrd.sh
 ./build-rootfs.sh
+./build-initrd.sh
+cp /boot/vmlinuz ${NETWDIR}/vmlinuz
