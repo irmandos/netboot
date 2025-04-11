@@ -187,11 +187,12 @@ mount -t tmpfs tmpfs /mnt/run
 [[ -d /mnt/run/lock ]] || mkdir /mnt/run/lock
 
 printf "\nInstalling to the ZFS root using debootstrap...\n\n"
+#components=main,restricted,universe,multiverse
 debootstrap \
  --arch="${DPKG_ARCH}" \
  --include="${INCLUDE_PACKAGES}" \
  --exclude="${EXCLUDE_PACKAGES}" \
- --components=main,universe \ #main,restricted,universe,multiverse
+ --components=main,universe \
  "${VERSION_CODENAME}" /mnt "${MIRROR}" \
   || fail "Installation failed running debootstrap"
 
