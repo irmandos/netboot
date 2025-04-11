@@ -283,9 +283,6 @@ update-locale LANG="${NEW_LOCALE}" &>/dev/null || fail "Failed running update-lo
 printf "${NEW_TIMEZONE}" > "/etc/timezone" || fail "Failed to update /etc/timezone"
 dpkg-reconfigure --frontend noninteractive tzdata &>/dev/null || fail "Failed setting timezone"
 
-printf "   auto-apt-proxy...\n"
-apt-get -qq install --yes auto-apt-proxy &>/dev/null || fail "Failed to install auto-apt-proxy"
-
 printf "Updating apt sources in the new installation...\n"
 apt-get clean
 apt-get update -qq &>/dev/null || fail "Failed updating apt cache."
