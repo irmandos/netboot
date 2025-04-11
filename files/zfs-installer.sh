@@ -188,8 +188,6 @@ touch /mnt/var/lib/dpkg/status || fail "Failed to create /var/lib/dpkg/status"
 mount -t tmpfs tmpfs /mnt/run
 [[ -d /mnt/run/lock ]] || mkdir /mnt/run/lock
 
-echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /mnt/etc/apt/apt.conf.d/00aptproxy
-
 printf "\nInstalling to the ZFS root using debootstrap...\n\n"
 debootstrap \
  --arch="${DPKG_ARCH}" \
@@ -199,7 +197,7 @@ debootstrap \
   || fail "Installation failed running debootstrap"
 
 printf "Performing system configuration...\n"
-
+echo 'Acquire::http::Proxy "http://apt-cacher-ng.bothahome.co.za:3142";' > /mnt/etc/apt/apt.conf.d/00aptproxy
 printf %b "root:${ROOT_PASSWD}" | sudo chroot /mnt chpasswd || fail "Failed to set the root password."
 printf "${NEW_HOSTNAME}\n" >/mnt/etc/hostname || fail "Failed to set the system hostname."
 
