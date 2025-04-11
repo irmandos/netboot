@@ -9,8 +9,8 @@ IMG_FILE="${NETWDIR}/rootfs.img"
 ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 
 #Ensure hostname is properly set to FQDN using host-namer.sh script in order for auto-apt-proxy to work corrctly
-chmod +x ${NETWDIR}/host-namer.sh
-./${NETWDIR}/host-namer.sh fqdn
+chmod +x ${SOURCE_FILES}/host-namer.sh
+./${SOURCE_FILES}/host-namer.sh fqdn
 
 #Ensure we have the tools we need
 apt install cifs-utils squashfs-tools initramfs-tools git wget nano auto-apt-proxy debootstrap -y
