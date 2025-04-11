@@ -13,7 +13,7 @@ ROOTFS_MNT="${NETWDIR}/rootfs.mnt"
 IMG_SIZE="512m"                 # Image size only matters when not using "squashfs" 
 VERSION_CODENAME="noble"
 DPKG_ARCH="amd64"
-INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap"
+INCLUDE_PACKAGES="zfsutils-linux,gdisk,openssh-server,openssh-client,wget,parted,debootstrap,haveged"
 EXCLUDE_PACKAGES="ubuntu-pro-client"
 MIRROR="http://archive.ubuntu.com/ubuntu"    #Using auto-apt-proxy no need to specify proxy here else use http://apt-cacher-ng.bothahome.co.za:3142/archive.ubuntu.com/ubuntu
 NETBOOT_HOSTNAME="netboot"
@@ -65,6 +65,8 @@ printf "%s" "${NETBOOT_HOSTNAME}" >"${ROOTFS_MNT}/etc/hostname" || fail "Failed 
 cp "${SOURCE_FILES}/01-networkd-dhcp.yaml" "${ROOTFS_MNT}/etc/netplan/" || fail "Failed to copy the netplan ${INSIDE_IMAGE}."
 
 # Set locale and timezone
+chroot "${ROOTFS_MNT}" sudo sed -i '/^#\?DAEMON_ARGS/ s/^#\?DAEMON_ARGS.*/DAEMON_ARGS="-w 1024"/' /etc/default/haveged
+chroot "${ROOTFS_MNT}" update-rc.d haveged defaults
 chroot "${ROOTFS_MNT}" locale-gen --purge "${NETBOOT_LOCALE}" || fail "Failed to generate the locale ${INSIDE_IMAGE}."
 chroot "${ROOTFS_MNT}" update-locale LANG="${NETBOOT_LOCALE}" || fail "Failed to update the locale ${INSIDE_IMAGE}."
 printf "${NETBOOT_TIMEZONE}" > "${ROOTFS_MNT}/etc/timezone" || fail "Failed to update /etc/timezone ${INSIDE_IMAGE}."
